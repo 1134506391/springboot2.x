@@ -7,7 +7,7 @@ import java.util.List;
 public interface UserService {
     public List<User> selectAll();
 
-
+    public Object selectByPage(Integer pageNum,Integer pageSize, String name);
 
     public User selectById(Integer id);
 
