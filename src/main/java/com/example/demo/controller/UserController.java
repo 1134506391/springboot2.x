@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.demo.common.JsonResult;
 import com.example.demo.dao.UserDao;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController()
 @RequestMapping("user")
 public class UserController {
@@ -23,8 +25,10 @@ public class UserController {
     @Autowired
     UserDao userDao;
 
+
+
     @GetMapping("")
-    public Map<String,Object> selectAllByPage(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+    public JsonResult<Map> selectAllByPage(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                       @RequestParam(name = "pageSize", required = false, defaultValue = "2") Integer pageSize,
                                       @RequestParam(name = "name",required = false) String name){
         Map<String,Object> map = new HashMap<String, Object>();
@@ -41,7 +45,8 @@ public class UserController {
         map.put("total",pageResult.getTotal());
         map.put("data",pageResult.getRecords());
 
-        return map;
+
+        return new JsonResult<>(map);
     }
 
     @GetMapping("detail")
