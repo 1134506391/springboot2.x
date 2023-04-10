@@ -1,45 +1,32 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.demo.dao.UserDao;
-import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.OrderVO;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@SpringBootTest
-class DemoApplicationTests {
-
+@RestController()
+@RequestMapping("test")
+public class testController {
     @Autowired
-    private UserDao userDao;
+    UserMapper userMapper;
 
-    @Test
-    void contextLoads() {
-    }
-
-    @Test
-    void testGetAll(){
-        List<User> list = userDao.selectList(null);
-        System.out.println(list);
-    }
-
-    @Autowired
-    private UserMapper userMapper;
-
-    @Test
-    void testSelectOrders() {
+    @GetMapping("")
+    public Object selectOrders() {
         List<OrderVO> orderVOS = userMapper.selectOrders();
-        System.out.println("orderVOS"+orderVOS);
+        System.out.println("orderVOS" + orderVOS);
+        return orderVOS;
     }
 
-    @Test
-    void testSelectOrdersPage() {
+    @GetMapping("page")
+    public Object selectOrdersPage() {
         // 查询第一页，每页显示 10 条
         Page<OrderVO> page = new Page<>(1, 10);
         // 注意：一定要手动关闭 SQL 优化，不然查询总数的时候只会查询主表
@@ -54,6 +41,8 @@ class DemoApplicationTests {
         System.out.println("总共多少页：" + page1.getPages());
         System.out.println("当前页码：" + page1.getCurrent());
         System.out.println("查询数据：" + page1.getRecords());
+        return page1;
     }
 
 }
+
