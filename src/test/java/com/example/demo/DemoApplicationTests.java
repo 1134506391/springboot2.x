@@ -3,10 +3,10 @@ package com.example.demo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.demo.dao.UserDao;
-import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
-import com.example.demo.model.OrderVO;
+import com.example.demo.entity.User;
+import com.example.demo.mapper.OrderMapper;
+import com.example.demo.entity.OrderVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +17,7 @@ import java.util.List;
 class DemoApplicationTests {
 
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
     @Test
     void contextLoads() {
@@ -25,16 +25,16 @@ class DemoApplicationTests {
 
     @Test
     void testGetAll(){
-        List<User> list = userDao.selectList(null);
+        List<User> list = userMapper.selectList(null);
         System.out.println(list);
     }
 
     @Autowired
-    private UserMapper userMapper;
+    private OrderMapper orderMapper;
 
     @Test
     void testSelectOrders() {
-        List<OrderVO> orderVOS = userMapper.selectOrders();
+        List<OrderVO> orderVOS = orderMapper.selectOrders();
         System.out.println("orderVOS"+orderVOS);
     }
 
@@ -48,7 +48,7 @@ class DemoApplicationTests {
         QueryWrapper<OrderVO> queryWrapper = new QueryWrapper<>();
         queryWrapper.ge("age", 20);
 
-        IPage<OrderVO> page1 = userMapper.selectOrderPage(page, queryWrapper);
+        IPage<OrderVO> page1 = orderMapper.selectOrderPage(page, queryWrapper);
 
         System.out.println("总记录数：" + page1.getTotal());
         System.out.println("总共多少页：" + page1.getPages());

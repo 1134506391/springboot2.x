@@ -2,7 +2,7 @@ package com.example.demo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.demo.dao.UserDao;
+import com.example.demo.mapper.UserMapper;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +15,10 @@ import java.util.Map;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
     public List<User> selectAll(){
-        return userDao.selectList(null);
+        return userMapper.selectList(null);
     }
 
     public Object selectByPage(Integer pageNum,Integer pageSize, String name) {
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
         lqw.eq(null != name,User::getName, name);
 
         Page<User> page = new Page<>(pageNum,pageSize);
-        Page<User> pageResult = userDao.selectPage(page,lqw);
+        Page<User> pageResult = userMapper.selectPage(page,lqw);
 
         map.put("pageNum",pageResult.getCurrent());
         map.put("pageSize",pageResult.getSize());
@@ -39,18 +39,18 @@ public class UserServiceImpl implements UserService {
     }
 
     public User selectById(Integer id){
-        return userDao.selectById(id);
+        return userMapper.selectById(id);
     }
 
     public void save(User user){
-        userDao.insert(user);
+        userMapper.insert(user);
     }
 
     public void update(User user){
-        userDao.updateById(user);
+        userMapper.updateById(user);
     }
 
     public void deleteById(Integer id){
-        userDao.deleteById(id);
+        userMapper.deleteById(id);
     }
 }
