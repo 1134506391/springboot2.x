@@ -25,7 +25,8 @@ public class UserServiceImpl implements UserService {
         Map<String,Object> map = new HashMap<String, Object>();
 
         LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<User>();
-        lqw.eq(null != name,User::getName, name);
+
+        lqw.eq(!(name==null||"".equals(name)),User::getName, name);
 
         Page<User> page = new Page<>(pageNum,pageSize);
         Page<User> pageResult = userMapper.selectPage(page,lqw);
