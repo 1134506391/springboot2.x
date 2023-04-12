@@ -2,6 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.common.JsonResult;
 import com.example.demo.entity.User;
+import com.example.demo.util.MyAsyncTask;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +18,7 @@ import java.util.List;
 
 @RestController()
 @RequestMapping("test")
+@Slf4j
 public class TescController {
 
     @Value("${web.upload-path}")
@@ -95,6 +99,15 @@ public class TescController {
     public String upload(MultipartFile file) throws Exception {
         file.transferTo(new File(uploadPath + file.getOriginalFilename()));
         return "上传成功";
+    }
+
+    @Autowired
+    private MyAsyncTask myAsyncTask;
+    @GetMapping("getMyConfig")
+    public String getMyConfig() {
+        myAsyncTask.publishMsg();
+        log.info("这是跳过异步任务的执行");
+        return "aa";
     }
 
 }
