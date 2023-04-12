@@ -2,16 +2,24 @@ package com.example.demo.controller;
 
 import com.example.demo.common.JsonResult;
 import com.example.demo.entity.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
 @RestController()
 @RequestMapping("test")
 public class TescController {
+
+    @Value("${web.upload-path}")
+    private String uploadPath;
+
     @GetMapping("treeList")
     public JsonResult<List> treeList(){
         User tree1=new User(1,"aaa",0);
@@ -82,4 +90,11 @@ public class TescController {
         List<User> list = Arrays.asList(User1, User2, User3,User4,User5);
         return new JsonResult<>(200, "获取用户列表成功",list);
     }
+
+    @PostMapping("upload")
+    public String upload(MultipartFile file) throws Exception {
+        file.transferTo(new File(uploadPath + file.getOriginalFilename()));
+        return "上传成功";
+    }
+
 }

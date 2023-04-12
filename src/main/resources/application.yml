@@ -1,5 +1,7 @@
 server:
   port: 8888
+web:
+  upload-path: D:/data/
 
 spring:
   datasource:
@@ -10,11 +12,7 @@ spring:
     password: 123456
   main:
     banner-mode: off
-  resources:
-    static-locations= file:F:\test\app\java\demo\src\main\resources\static\images
-  mvc:
-    view:
-      suffix: html
+
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
 #  configuration:
