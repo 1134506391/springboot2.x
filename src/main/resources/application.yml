@@ -12,6 +12,10 @@ spring:
     password: 123456
   main:
     banner-mode: off
+  servlet:
+    multipart:
+      max-file-size: 100KB  # 文件上传大小的限制，设置最大值，不能超过，否则报错
+      max-request-size: 2MB # 文件最大请求限制，用于批量
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
