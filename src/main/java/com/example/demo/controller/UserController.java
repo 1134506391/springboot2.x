@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.common.JsonResult;
+import com.example.demo.util.JSONResult;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
@@ -21,32 +21,33 @@ public class UserController {
 
 
     @GetMapping("")
-    public  JsonResult<Object> selectByPage(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-                                            @RequestParam(name = "pageSize", required = false, defaultValue = "2") Integer pageSize,
-                                            @RequestParam(name = "name",required = false) String name){
-        return  new JsonResult<>(userService.selectByPage(pageNum,pageSize,name));
+    public JSONResult selectByPage(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                                           @RequestParam(name = "pageSize", required = false, defaultValue = "2") Integer pageSize,
+                                           @RequestParam(name = "name",required = false) String name){
+//        return  new JSONResult<>(userService.selectByPage(pageNum,pageSize,name));
+        return JSONResult.ok(userService.selectByPage(pageNum,pageSize,name));
     }
 
     @GetMapping("detail")
-        public JsonResult<User> selectById(@RequestParam(name = "id")Integer id){
-        return new JsonResult<>(userService.selectById(id));
+        public JSONResult selectById(@RequestParam(name = "id")Integer id){
+        return JSONResult.ok(userService.selectById(id));
     }
 
     @PostMapping("")
-    public JsonResult<Map> save(@RequestBody User user){
+    public JSONResult save(@RequestBody User user){
         userService.save(user);
-        return new JsonResult<>(new HashMap<>());
+        return JSONResult.ok();
     }
 
     @PutMapping("")
-    public JsonResult<Map> update(@RequestBody User user){
+    public JSONResult update(@RequestBody User user){
         userService.update(user);
-        return new JsonResult<>(new HashMap<>());
+        return JSONResult.ok();
     }
 
     @DeleteMapping("{id}")
-        public JsonResult<Map> delete(@PathVariable("id") Integer id){
+        public JSONResult delete(@PathVariable("id") Integer id){
         userService.deleteById(id);
-        return new JsonResult<>(new HashMap<>());
+        return JSONResult.ok();
     }
 }

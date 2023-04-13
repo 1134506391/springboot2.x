@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.common.JsonResult;
+import com.example.demo.util.JSONResult;
 import com.example.demo.entity.User;
 import com.example.demo.util.MyAsyncTask;
 import lombok.extern.slf4j.Slf4j;
@@ -25,18 +25,18 @@ public class TescController {
     private String uploadPath;
 
     @GetMapping("treeList")
-    public JsonResult<List> treeList(){
+    public JSONResult treeList(){
         User tree1=new User(1,"aaa",0);
         User tree2=new User(2,"bbb",0);
         User tree3=new User(3,"ccc",0);
         User tree4 = new User();
 
         List<User> list = Arrays.asList(tree1, tree2, tree3,tree4);
-        return new JsonResult<>(200, "获取用户列表成功",list);
+        return  JSONResult.ok(list);
     }
 
     @GetMapping("personList")
-    public JsonResult<List> UserList(){
+    public JSONResult UserList(){
         User User1=new User(1,"aaa",0);
         User User2=new User(2,"bbb",0);
         User User3=new User(3,"ccc",0);
@@ -44,11 +44,11 @@ public class TescController {
         User User5=new User(5,"eee",0);
 
         List<User> list = Arrays.asList(User1, User2, User3,User4,User5);
-        return new JsonResult<>(200, "获取用户列表成功",list);
+        return JSONResult.ok(list);
     }
 
     @GetMapping("dogList")
-    public JsonResult<List> dogList(){
+    public JSONResult dogList(){
         User User1=new User(1,"aaa",0);
         User User2=new User(2,"bbb",0);
         User User3=new User(3,"ccc",0);
@@ -56,11 +56,11 @@ public class TescController {
         User User5=new User(5,"eee",0);
 
         List<User> list = Arrays.asList(User1, User2, User3,User4,User5);
-        return new JsonResult<>(200, "获取用户列表成功",list);
+        return JSONResult.ok(list);
     }
 
     @GetMapping("tabList1")
-    public JsonResult<List> tabList1(){
+    public JSONResult tabList1(){
         User User1=new User(1,"111",0);
         User User2=new User(2,"111",0);
         User User3=new User(3,"111",0);
@@ -68,11 +68,11 @@ public class TescController {
         User User5=new User(5,"111",0);
 
         List<User> list = Arrays.asList(User1, User2, User3,User4,User5);
-        return new JsonResult<>(200, "获取用户列表成功",list);
+        return JSONResult.ok(list);
     }
 
     @GetMapping("tabList2")
-    public JsonResult<List> tabList2(){
+    public JSONResult tabList2(){
         User User1=new User(1,"222",0);
         User User2=new User(2,"222",0);
         User User3=new User(3,"222",0);
@@ -80,11 +80,11 @@ public class TescController {
         User User5=new User(5,"222",0);
 
         List<User> list = Arrays.asList(User1, User2, User3,User4,User5);
-        return new JsonResult<>(200, "获取用户列表成功",list);
+        return JSONResult.ok(list);
     }
 
     @GetMapping("tabList3")
-    public JsonResult<List> tabList3(){
+    public JSONResult tabList3(){
         User User1=new User(1,"333",0);
         User User2=new User(2,"333",0);
         User User3=new User(3,"333",0);
@@ -92,7 +92,7 @@ public class TescController {
         User User5=new User(5,"333",0);
 
         List<User> list = Arrays.asList(User1, User2, User3,User4,User5);
-        return new JsonResult<>(200, "获取用户列表成功",list);
+        return JSONResult.ok(list);
     }
 
     @PostMapping("upload")

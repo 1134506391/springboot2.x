@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @Slf4j
 public class Mytask {
 
-    @Scheduled(cron = "*/5 * * * * ?")
-    public void publishMsg(){
-        log.warn("开始执行任务: " + LocalDateTime.now());
-    }
+   @Scheduled(cron = "*/5 * * * * ?")
+   public void publishMsg(){
+       log.warn("开始执行任务: " + LocalDateTime.now());
+   }
 }
