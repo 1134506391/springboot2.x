@@ -12,6 +12,7 @@
     <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>demo</name>
+    <packaging>jar</packaging>
     <description>demo</description>
     <properties>
         <java.version>17</java.version>
@@ -56,9 +57,19 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
+        <!-- SpringBoot 健康检查 -->
+        <!-- http://localhost:8888/actuator/health -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
+        <!-- 1.点击maven->双击install
+        2.在target中查看新生成的jar包
+        3.运行： java -jar  xxx.jar  -->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
